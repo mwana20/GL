@@ -10,6 +10,7 @@ import {
   AdminRole
 } from '../types';
 import { INITIAL_LISTINGS } from '../data/seedListings';
+import { INITIAL_ADMIN_UNITS, INITIAL_DISTRICTS } from '../data/ugandaGeography';
 
 const API_BASE = '/api';
 
@@ -18,6 +19,12 @@ class ApiError extends Error {
     super(message);
     this.name = 'ApiError';
   }
+}
+
+function isApiUnavailable(error: unknown): boolean {
+  return error instanceof TypeError ||
+    error instanceof SyntaxError ||
+    (error instanceof ApiError && error.status === 404);
 }
 
 export function getAdminToken(): string | null {
@@ -67,14 +74,30 @@ export const api = {
   // ==========================================
   async getDistricts(region?: string): Promise<District[]> {
     const query = region ? `?region=${encodeURIComponent(region)}` : '';
-    const res = await request<{ districts: District[] }>(`/districts${query}`);
-    return res.districts;
+    try {
+      const res = await request<{ districts: District[] }>(`/districts${query}`);
+      return res.districts;
+    } catch (error) {
+      if (!isApiUnavailable(error)) throw error;
+      console.error('Districts API is unavailable; showing bundled district data.', error);
+      return INITIAL_DISTRICTS.filter((district) =>
+        district.isActive && (!region || district.region === region)
+      );
+    }
   },
 
   async getSubcounties(districtId?: string): Promise<AdministrativeUnit[]> {
     const query = districtId ? `?districtId=${encodeURIComponent(districtId)}` : '';
-    const res = await request<{ units: AdministrativeUnit[] }>(`/subcounties${query}`);
-    return res.units;
+    try {
+      const res = await request<{ units: AdministrativeUnit[] }>(`/subcounties${query}`);
+      return res.units;
+    } catch (error) {
+      if (!isApiUnavailable(error)) throw error;
+      console.error('Subcounties API is unavailable; showing bundled administrative-unit data.', error);
+      return INITIAL_ADMIN_UNITS.filter((unit) =>
+        unit.isActive && (!districtId || unit.districtId === districtId)
+      );
+    }
   },
 
   async getListings(filters: SearchFilters = {}): Promise<{
@@ -96,10 +119,7 @@ export const api = {
     try {
       return await request<{ total: number; listings: LandListing[] }>(`/listings${qs ? `?${qs}` : ''}`);
     } catch (error) {
-      const apiUnavailable = error instanceof TypeError ||
-        error instanceof SyntaxError ||
-        (error instanceof ApiError && error.status === 404);
-      if (!apiUnavailable) throw error;
+      if (!isApiUnavailable(error)) throw error;
 
       console.error('Listings API is unavailable; showing bundled demo listings.', error);
       let listings = INITIAL_LISTINGS.filter((listing) => listing.publicationStatus === 'published');
