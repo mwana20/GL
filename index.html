@@ -23,6 +23,12 @@
   </head>
   <body class="bg-neutral-50 text-neutral-900 antialiased font-sans selection:bg-emerald-900 selection:text-white">
     <div id="root"></div>
+    <script>
+      const spaRoute = new URLSearchParams(window.location.search).get('__spa_route');
+      if (spaRoute) {
+        window.history.replaceState(null, '', spaRoute);
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

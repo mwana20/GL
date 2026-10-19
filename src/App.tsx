@@ -12,6 +12,14 @@ import { DueDiligenceGuidePage } from './pages/DueDiligenceGuidePage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { buildWhatsAppInquiryUrl } from './utils/formatters';
 
+function getPublicTab(pathname: string): 'home' | 'catalog' | 'about' | 'guide' {
+  const route = pathname.replace(/\/+$/, '') || '/';
+  if (route === '/catalog') return 'catalog';
+  if (route === '/about') return 'about';
+  if (route === '/guide') return 'guide';
+  return 'home';
+}
+
 export function App() {
   // Detect if current route is the private admin portal (/admin or /admin/*)
   const [isAdminPortal, setIsAdminPortal] = useState<boolean>(() => {
@@ -21,7 +29,9 @@ export function App() {
     return false;
   });
 
-  const [currentTab, setCurrentTab] = useState<'home' | 'catalog' | 'detail' | 'about' | 'guide'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'catalog' | 'detail' | 'about' | 'guide'>(() =>
+    typeof window === 'undefined' ? 'home' : getPublicTab(window.location.pathname)
+  );
   const [selectedListing, setSelectedListing] = useState<LandListing | null>(null);
   const [catalogFilters, setCatalogFilters] = useState<SearchFilters>({});
   const [featuredListings, setFeaturedListings] = useState<LandListing[]>([]);

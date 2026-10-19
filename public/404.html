@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>Loading GL Real Estates</title>
+  </head>
+  <body>
+    <script>
+      const route = window.location.pathname + window.location.search + window.location.hash;
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      const routeSegment = segments.findIndex((segment) =>
+        ['catalog', 'about', 'guide', 'admin'].includes(segment)
+      );
+      const baseSegments = routeSegment >= 0 ? segments.slice(0, routeSegment) : segments.slice(0, -1);
+      const basePath = `/${baseSegments.length ? `${baseSegments.join('/')}/` : ''}`;
+      const returnUrl = new URL(basePath, window.location.origin);
+      returnUrl.searchParams.set('__spa_route', route);
+      window.location.replace(returnUrl.toString());
+    </script>
+  </body>
+</html>

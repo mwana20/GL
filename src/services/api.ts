@@ -24,7 +24,12 @@ class ApiError extends Error {
 function isApiUnavailable(error: unknown): boolean {
   return error instanceof TypeError ||
     error instanceof SyntaxError ||
-    (error instanceof ApiError && error.status === 404);
+    (error instanceof ApiError && (
+      error.status === 401 ||
+      error.status === 403 ||
+      error.status === 404 ||
+      error.status >= 500
+    ));
 }
 
 export function getAdminToken(): string | null {
@@ -76,28 +81,34 @@ export const api = {
     const query = region ? `?region=${encodeURIComponent(region)}` : '';
     try {
       const res = await request<{ districts: District[] }>(`/districts${query}`);
-      return res.districts;
+      if (Array.isArray(res.districts) && res.districts.length > 0) {
+        return res.districts;
+      }
+      console.warn('Districts API returned no districts; showing bundled district data.');
     } catch (error) {
       if (!isApiUnavailable(error)) throw error;
       console.error('Districts API is unavailable; showing bundled district data.', error);
-      return INITIAL_DISTRICTS.filter((district) =>
-        district.isActive && (!region || district.region === region)
-      );
     }
+    return INITIAL_DISTRICTS.filter((district) =>
+      district.isActive && (!region || district.region === region)
+    );
   },
 
   async getSubcounties(districtId?: string): Promise<AdministrativeUnit[]> {
     const query = districtId ? `?districtId=${encodeURIComponent(districtId)}` : '';
     try {
       const res = await request<{ units: AdministrativeUnit[] }>(`/subcounties${query}`);
-      return res.units;
+      if (Array.isArray(res.units) && res.units.length > 0) {
+        return res.units;
+      }
+      console.warn('Subcounties API returned no administrative units; showing bundled data.');
     } catch (error) {
       if (!isApiUnavailable(error)) throw error;
       console.error('Subcounties API is unavailable; showing bundled administrative-unit data.', error);
-      return INITIAL_ADMIN_UNITS.filter((unit) =>
-        unit.isActive && (!districtId || unit.districtId === districtId)
-      );
     }
+    return INITIAL_ADMIN_UNITS.filter((unit) =>
+      unit.isActive && (!districtId || unit.districtId === districtId)
+    );
   },
 
   async getListings(filters: SearchFilters = {}): Promise<{
