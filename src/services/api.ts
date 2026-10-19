@@ -12,7 +12,7 @@ import {
 import { INITIAL_LISTINGS } from '../data/seedListings';
 import { INITIAL_ADMIN_UNITS, INITIAL_DISTRICTS } from '../data/ugandaGeography';
 
-const API_BASE = '/api';
+const API_BASE = `${import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, '') || ''}/api`;
 
 class ApiError extends Error {
   constructor(message: string, public readonly status: number) {

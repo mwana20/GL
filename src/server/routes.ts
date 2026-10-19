@@ -655,7 +655,9 @@ apiRouter.post(
         return res.status(400).json({ error: 'base64Data and filename are required' });
       }
 
-      const uploadsDir = path.resolve(process.cwd(), 'public', 'uploads');
+      const uploadsDir = process.env.UPLOADS_DIR
+        ? path.resolve(process.env.UPLOADS_DIR)
+        : path.resolve(process.cwd(), 'public', 'uploads');
       if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
       }
@@ -666,7 +668,9 @@ apiRouter.post(
       const base64Content = base64Data.replace(/^data:[^;]+;base64,/, '');
       fs.writeFileSync(filePath, Buffer.from(base64Content, 'base64'));
 
-      const publicUrl = `/uploads/${cleanFilename}`;
+      const publicApiUrl = (process.env.PUBLIC_API_URL || process.env.RENDER_EXTERNAL_URL || '')
+        .replace(/\/+$/, '');
+      const publicUrl = `${publicApiUrl}/uploads/${cleanFilename}`;
       res.status(201).json({
         url: publicUrl,
         mediaType: mediaType || 'photo',
