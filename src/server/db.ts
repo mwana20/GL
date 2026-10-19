@@ -147,10 +147,21 @@ class DatabaseService {
       if (fs.existsSync(DB_FILE)) {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         const parsed = JSON.parse(raw);
+        const listings: LandListing[] = parsed.listings || INITIAL_LISTINGS;
+        const hasLegacyImageUrls = listings.some((listing) =>
+          listing.media.some((media) => media.url.startsWith('/src/assets/images/'))
+        );
+        const normalizedListings = listings.map((listing) => ({
+          ...listing,
+          media: listing.media.map((media) => ({
+            ...media,
+            url: media.url.replace(/^\/src\/assets\/images\//, '/images/')
+          }))
+        }));
         this.data = {
           districts: parsed.districts || INITIAL_DISTRICTS,
           administrativeUnits: parsed.administrativeUnits || INITIAL_ADMIN_UNITS,
-          listings: parsed.listings || INITIAL_LISTINGS,
+          listings: normalizedListings,
           siteVisits: parsed.siteVisits || [],
           inquiries: parsed.inquiries || [],
           auditLogs: parsed.auditLogs || [],
@@ -158,6 +169,7 @@ class DatabaseService {
           sessions: parsed.sessions || [],
           nextListingNumber: parsed.nextListingNumber || (parsed.listings ? parsed.listings.length + 1 : 7)
         };
+        if (hasLegacyImageUrls) this.persistSync();
       } else {
         this.persistSync();
       }

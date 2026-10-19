@@ -30,7 +30,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       <section className="relative min-h-[340px] sm:min-h-[400px] flex items-center justify-center bg-neutral-900 text-white overflow-hidden px-4 sm:px-6 lg:px-8 py-16">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/footer_uganda_landscape_1792431441626.jpg"
+            src="/images/footer_uganda_landscape_1792431441626.jpg"
             alt="Glorious Living scenic Uganda landscape"
             className="w-full h-full object-cover object-center brightness-100 contrast-105"
           />

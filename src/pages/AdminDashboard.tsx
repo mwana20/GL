@@ -330,9 +330,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [formIsFeatured, setFormIsFeatured] = useState(false);
 
   // 3 Photos + 1 Video State
-  const [photo1Url, setPhoto1Url] = useState('/src/assets/images/uganda_plot_residential_1792429858634.jpg');
-  const [photo2Url, setPhoto2Url] = useState('/src/assets/images/uganda_plot_access_road_1792429877467.jpg');
-  const [photo3Url, setPhoto3Url] = useState('/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg');
+  const [photo1Url, setPhoto1Url] = useState('/images/uganda_plot_residential_1792429858634.jpg');
+  const [photo2Url, setPhoto2Url] = useState('/images/uganda_plot_access_road_1792429877467.jpg');
+  const [photo3Url, setPhoto3Url] = useState('/images/uganda_plot_detail_boundary_1792429877540.jpg');
   const [videoUrl, setVideoUrl] = useState('https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
   const [formError, setFormError] = useState('');
   const [listingModalOpen, setListingModalOpen] = useState(false);
@@ -357,9 +357,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setFormAvailability('available');
     setFormPublicationStatus('published');
     setFormIsFeatured(false);
-    setPhoto1Url('/src/assets/images/uganda_plot_residential_1792429858634.jpg');
-    setPhoto2Url('/src/assets/images/uganda_plot_access_road_1792429877467.jpg');
-    setPhoto3Url('/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg');
+    setPhoto1Url('/images/uganda_plot_residential_1792429858634.jpg');
+    setPhoto2Url('/images/uganda_plot_access_road_1792429877467.jpg');
+    setPhoto3Url('/images/uganda_plot_detail_boundary_1792429877540.jpg');
     setVideoUrl('https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
     setFormError('');
     navigateToSection('add-listing');
@@ -661,7 +661,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Full-bleed Ugandan Estate Landscape Background Image (Bright & Clearly Visible) */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/admin_login_backdrop_1792434291314.jpg"
+            src="/images/admin_login_backdrop_1792434291314.jpg"
             alt="GL Real Estates surveyed land plots and rolling hills"
             className="w-full h-full object-cover object-center brightness-95 contrast-105"
           />

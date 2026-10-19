@@ -32,7 +32,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0001_1',
         listingId: 'plot_gl_0001',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_residential_1792429858634.jpg',
+        url: '/images/uganda_plot_residential_1792429858634.jpg',
         displayOrder: 1,
         caption: 'Primary front view showing corner survey boundary beacon and cleared grounds'
       },
@@ -40,7 +40,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0001_2',
         listingId: 'plot_gl_0001',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_access_road_1792429877467.jpg',
+        url: '/images/uganda_plot_access_road_1792429877467.jpg',
         displayOrder: 2,
         caption: 'Graded access road leading directly to the property'
       },
@@ -48,7 +48,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0001_3',
         listingId: 'plot_gl_0001',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg',
+        url: '/images/uganda_plot_detail_boundary_1792429877540.jpg',
         displayOrder: 3,
         caption: 'Concrete cadastral survey beacon marking official boundary perimeter'
       },
@@ -98,7 +98,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0002_1',
         listingId: 'plot_gl_0002',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_commercial_1792429859979.jpg',
+        url: '/images/uganda_plot_commercial_1792429859979.jpg',
         displayOrder: 1,
         caption: 'Direct tarmac corridor road-front view and utility poles'
       },
@@ -106,7 +106,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0002_2',
         listingId: 'plot_gl_0002',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg',
+        url: '/images/uganda_plot_detail_boundary_1792429877540.jpg',
         displayOrder: 2,
         caption: 'Concrete cadastral survey peg showing surveyed boundary'
       },
@@ -114,7 +114,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0002_3',
         listingId: 'plot_gl_0002',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_access_road_1792429877467.jpg',
+        url: '/images/uganda_plot_access_road_1792429877467.jpg',
         displayOrder: 3,
         caption: 'Secondary side service road allowing truck entry and offloading'
       },
@@ -164,7 +164,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0003_1',
         listingId: 'plot_gl_0003',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_lake_entebbe_1792429875535.jpg',
+        url: '/images/uganda_plot_lake_entebbe_1792429875535.jpg',
         displayOrder: 1,
         caption: 'Elevated view across green acreage looking directly onto Lake Victoria'
       },
@@ -172,7 +172,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0003_2',
         listingId: 'plot_gl_0003',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_residential_1792429858634.jpg',
+        url: '/images/uganda_plot_residential_1792429858634.jpg',
         displayOrder: 2,
         caption: 'Cleared lawn terrain with perimeter boundary markers'
       },
@@ -180,7 +180,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0003_3',
         listingId: 'plot_gl_0003',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg',
+        url: '/images/uganda_plot_detail_boundary_1792429877540.jpg',
         displayOrder: 3,
         caption: 'Detailed survey corner beacon showing verified coordinates'
       },
@@ -230,7 +230,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0004_1',
         listingId: 'plot_gl_0004',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_farmland_1792429859443.jpg',
+        url: '/images/uganda_plot_farmland_1792429859443.jpg',
         displayOrder: 1,
         caption: 'Fertile tilled black soil and banana vegetation across the acreage'
       },
@@ -238,7 +238,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0004_2',
         listingId: 'plot_gl_0004',
         mediaType: 'photo',
-        url: '/src/assets/images/hero_uganda_landscape_1792429858568.jpg',
+        url: '/images/hero_uganda_landscape_1792429858568.jpg',
         displayOrder: 2,
         caption: 'Panoramic valley view showcasing neighboring agricultural farms'
       },
@@ -246,7 +246,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0004_3',
         listingId: 'plot_gl_0004',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg',
+        url: '/images/uganda_plot_detail_boundary_1792429877540.jpg',
         displayOrder: 3,
         caption: 'Survey beacon installed at farm perimeter boundary'
       },
@@ -296,7 +296,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0005_1',
         listingId: 'plot_gl_0005',
         mediaType: 'photo',
-        url: '/src/assets/images/hero_uganda_landscape_1792429858568.jpg',
+        url: '/images/hero_uganda_landscape_1792429858568.jpg',
         displayOrder: 1,
         caption: 'Hilltop landscape view looking across the Kasangati valley'
       },
@@ -304,7 +304,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0005_2',
         listingId: 'plot_gl_0005',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_access_road_1792429877467.jpg',
+        url: '/images/uganda_plot_access_road_1792429877467.jpg',
         displayOrder: 2,
         caption: 'Red murram access road with clear drainage and electricity poles'
       },
@@ -312,7 +312,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0005_3',
         listingId: 'plot_gl_0005',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_residential_1792429858634.jpg',
+        url: '/images/uganda_plot_residential_1792429858634.jpg',
         displayOrder: 3,
         caption: 'Cleared building footprint ready for foundation layout'
       },
@@ -362,7 +362,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0006_1',
         listingId: 'plot_gl_0006',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_residential_1792429858634.jpg',
+        url: '/images/uganda_plot_residential_1792429858634.jpg',
         displayOrder: 1,
         caption: 'Broad front view across the 75 decimals plot footprint'
       },
@@ -370,7 +370,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0006_2',
         listingId: 'plot_gl_0006',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_commercial_1792429859979.jpg',
+        url: '/images/uganda_plot_commercial_1792429859979.jpg',
         displayOrder: 2,
         caption: 'Commercial road frontage and nearby city infrastructure'
       },
@@ -378,7 +378,7 @@ export const INITIAL_LISTINGS: LandListing[] = [
         id: 'med_0006_3',
         listingId: 'plot_gl_0006',
         mediaType: 'photo',
-        url: '/src/assets/images/uganda_plot_detail_boundary_1792429877540.jpg',
+        url: '/images/uganda_plot_detail_boundary_1792429877540.jpg',
         displayOrder: 3,
         caption: 'Corner demarcation beacon with survey numbers stamped'
       },

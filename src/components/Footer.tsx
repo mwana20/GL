@@ -12,7 +12,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       {/* Background Image with Scrim for Perfect Contrast & Legibility */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/footer_uganda_landscape_1792431441626.jpg"
+          src="/images/footer_uganda_landscape_1792431441626.jpg"
           alt="Tranquil Ugandan landscape at dusk"
           className="w-full h-full object-cover object-center opacity-40 brightness-90 scale-105"
         />

@@ -38,7 +38,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Background Image with Reduced Darkness */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/hero_uganda_landscape_1792429858568.jpg"
+            src="/images/hero_uganda_landscape_1792429858568.jpg"
             alt="Scenic rolling hills and surveyed land in Uganda"
             className="w-full h-full object-cover object-center brightness-100 contrast-105"
           />

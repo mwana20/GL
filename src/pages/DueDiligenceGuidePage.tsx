@@ -28,7 +28,7 @@ export const DueDiligenceGuidePage: React.FC<DueDiligenceGuidePageProps> = ({ on
       <section className="relative min-h-[320px] sm:min-h-[380px] flex items-center justify-center bg-neutral-900 text-white overflow-hidden px-4 sm:px-6 lg:px-8 py-16">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/hero_uganda_landscape_1792429858568.jpg"
+            src="/images/hero_uganda_landscape_1792429858568.jpg"
             alt="Surveyed Ugandan land boundaries and landscape"
             className="w-full h-full object-cover object-center brightness-100 contrast-105"
           />

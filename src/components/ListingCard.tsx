@@ -16,7 +16,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   // Find primary photo (display order 1 or first photo)
   const photos = listing.media.filter((m) => m.mediaType === 'photo');
-  const mainPhoto = photos[0]?.url || '/src/assets/images/uganda_plot_residential_1792429858634.jpg';
+  const mainPhoto = photos[0]?.url || '/images/uganda_plot_residential_1792429858634.jpg';
   const hasVideo = listing.media.some((m) => m.mediaType === 'video');
 
   const handleWhatsAppClick = (e: React.MouseEvent) => {

@@ -151,7 +151,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
       <section className="relative min-h-[320px] sm:min-h-[380px] flex items-center justify-center bg-neutral-900 text-white overflow-hidden px-4 sm:px-6 lg:px-8 py-16">
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/images/hero_catalog_uganda_1792431441419.jpg"
+            src="/images/hero_catalog_uganda_1792431441419.jpg"
             alt="Surveyed Ugandan parcels and green countryside"
             className="w-full h-full object-cover object-center brightness-100 contrast-105"
           />

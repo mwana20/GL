@@ -56,7 +56,7 @@ export const ListingDetailPage: React.FC<ListingDetailPageProps> = ({
   const isSold = listing.availability === 'sold';
 
   // Primary photo for hero backdrop
-  const primaryPhoto = listing.media.find((m) => m.mediaType === 'photo')?.url || '/src/assets/images/hero_uganda_landscape_1792429858568.jpg';
+  const primaryPhoto = listing.media.find((m) => m.mediaType === 'photo')?.url || '/images/hero_uganda_landscape_1792429858568.jpg';
 
   return (
     <div className="space-y-8 pb-16">
