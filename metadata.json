@@ -1,0 +1,6 @@
+{
+  "name": "GL Real Estates — Glorious Living",
+  "description": "Premium Uganda-wide land sales and marketing management platform. Discover surveyed plots across all districts with verified locations, media tours, WhatsApp inquiries, site visits, and secure admin management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
