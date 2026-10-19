@@ -19,6 +19,7 @@ import { GL_PHONE_NUMBER, GL_PHONE_INTERNATIONAL, buildGeneralWhatsAppUrl } from
 interface HomePageProps {
   featuredListings: LandListing[];
   recentListings: LandListing[];
+  isDemoListingFallback?: boolean;
   onSelectListing: (listing: LandListing) => void;
   onSearch: (filters: any) => void;
   onNavigate: (tab: string, extra?: any) => void;
@@ -27,6 +28,7 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({
   featuredListings,
   recentListings,
+  isDemoListingFallback = false,
   onSelectListing,
   onSearch,
   onNavigate,
@@ -94,7 +96,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Official GL Real Estates Demonstration Database
               </p>
               <p className="text-amber-800 mt-0.5">
-                The listings presented below represent verified demonstration land records configured for system review until approved or supplemented by GL Real Estates.
+                {isDemoListingFallback
+                  ? 'The listings service is unavailable, so bundled demonstration listings are shown. Connect the listings API to display current property records.'
+                  : 'The listings presented below represent verified demonstration land records configured for system review until approved or supplemented by GL Real Estates.'}
               </p>
             </div>
           </div>

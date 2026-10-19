@@ -9,8 +9,16 @@ import {
   AdminUser,
   AdminRole
 } from '../types';
+import { INITIAL_LISTINGS } from '../data/seedListings';
 
 const API_BASE = '/api';
+
+class ApiError extends Error {
+  constructor(message: string, public readonly status: number) {
+    super(message);
+    this.name = 'ApiError';
+  }
+}
 
 export function getAdminToken(): string | null {
   return localStorage.getItem('gl_admin_token');
@@ -47,7 +55,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
       clearAdminToken();
       window.dispatchEvent(new CustomEvent('gl_session_expired'));
     }
-    throw new Error(errorData.error || `HTTP error! status: ${res.status}`);
+    throw new ApiError(errorData.error || `HTTP error! status: ${res.status}`, res.status);
   }
 
   return res.json();
@@ -69,7 +77,11 @@ export const api = {
     return res.units;
   },
 
-  async getListings(filters: SearchFilters = {}): Promise<{ total: number; listings: LandListing[] }> {
+  async getListings(filters: SearchFilters = {}): Promise<{
+    total: number;
+    listings: LandListing[];
+    isDemoFallback?: boolean;
+  }> {
     const params = new URLSearchParams();
     if (filters.districtId) params.append('districtId', filters.districtId);
     if (filters.administrativeUnitId) params.append('administrativeUnitId', filters.administrativeUnitId);
@@ -81,7 +93,60 @@ export const api = {
     if (filters.sortBy) params.append('sortBy', filters.sortBy);
 
     const qs = params.toString();
-    return request<{ total: number; listings: LandListing[] }>(`/listings${qs ? `?${qs}` : ''}`);
+    try {
+      return await request<{ total: number; listings: LandListing[] }>(`/listings${qs ? `?${qs}` : ''}`);
+    } catch (error) {
+      const apiUnavailable = error instanceof TypeError ||
+        error instanceof SyntaxError ||
+        (error instanceof ApiError && error.status === 404);
+      if (!apiUnavailable) throw error;
+
+      console.error('Listings API is unavailable; showing bundled demo listings.', error);
+      let listings = INITIAL_LISTINGS.filter((listing) => listing.publicationStatus === 'published');
+
+      if (filters.districtId) {
+        listings = listings.filter((listing) => listing.districtId === filters.districtId);
+      }
+      if (filters.administrativeUnitId) {
+        listings = listings.filter((listing) => listing.administrativeUnitId === filters.administrativeUnitId);
+      }
+      if (filters.category && filters.category !== 'all') {
+        listings = listings.filter((listing) => listing.category === filters.category);
+      }
+      if (filters.availability && filters.availability !== 'all') {
+        listings = listings.filter((listing) => listing.availability === filters.availability);
+      }
+      if (filters.minPriceUgx !== undefined && filters.minPriceUgx > 0) {
+        listings = listings.filter((listing) => listing.priceUgx >= filters.minPriceUgx!);
+      }
+      if (filters.maxPriceUgx !== undefined && filters.maxPriceUgx > 0) {
+        listings = listings.filter((listing) => listing.priceUgx <= filters.maxPriceUgx!);
+      }
+      if (filters.query?.trim()) {
+        const query = filters.query.toLowerCase().trim();
+        listings = listings.filter((listing) =>
+          listing.title.toLowerCase().includes(query) ||
+          listing.description.toLowerCase().includes(query) ||
+          listing.referenceNumber.toLowerCase().includes(query) ||
+          listing.districtName.toLowerCase().includes(query) ||
+          listing.administrativeUnitName.toLowerCase().includes(query) ||
+          listing.parishOrWard?.toLowerCase().includes(query) ||
+          listing.villageOrLocality?.toLowerCase().includes(query)
+        );
+      }
+
+      if (filters.sortBy === 'price_asc') {
+        listings.sort((a, b) => a.priceUgx - b.priceUgx);
+      } else if (filters.sortBy === 'price_desc') {
+        listings.sort((a, b) => b.priceUgx - a.priceUgx);
+      } else if (filters.sortBy === 'size_desc') {
+        listings.sort((a, b) => b.landSize - a.landSize);
+      } else {
+        listings.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      }
+
+      return { total: listings.length, listings, isDemoFallback: true };
+    }
   },
 
   async getListingById(idOrRef: string): Promise<LandListing> {

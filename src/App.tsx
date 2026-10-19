@@ -27,6 +27,7 @@ export function App() {
   const [featuredListings, setFeaturedListings] = useState<LandListing[]>([]);
   const [recentListings, setRecentListings] = useState<LandListing[]>([]);
   const [allListings, setAllListings] = useState<LandListing[]>([]);
+  const [isDemoListingFallback, setIsDemoListingFallback] = useState(false);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   // Initial load: fetch listings & monitor popstate
@@ -40,6 +41,7 @@ export function App() {
     api.getListings({})
       .then((res) => {
         const all = res.listings;
+        setIsDemoListingFallback(Boolean(res.isDemoFallback));
         setAllListings(all);
         const featured = all.filter((l) => l.isFeatured);
         setFeaturedListings(featured.length > 0 ? featured.slice(0, 3) : all.slice(0, 3));
@@ -207,6 +209,7 @@ export function App() {
           <HomePage
             featuredListings={featuredListings}
             recentListings={recentListings}
+            isDemoListingFallback={isDemoListingFallback}
             onSelectListing={handleSelectListing}
             onSearch={handleHeroSearch}
             onNavigate={handleNavigate}

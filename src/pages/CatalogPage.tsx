@@ -31,6 +31,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
   const [listings, setListings] = useState<LandListing[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isDemoFallback, setIsDemoFallback] = useState(false);
 
   // Geography state
   const [districts, setDistricts] = useState<District[]>([]);
@@ -93,6 +94,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
       .then((res) => {
         setListings(res.listings);
         setTotalCount(res.total);
+        setIsDemoFallback(Boolean(res.isDemoFallback));
       })
       .catch((err) => console.error('Failed to load listings:', err))
       .finally(() => setLoading(false));
@@ -128,6 +130,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
       .then((res) => {
         setListings(res.listings);
         setTotalCount(res.total);
+        setIsDemoFallback(Boolean(res.isDemoFallback));
       })
       .catch((err) => console.error(err));
   };
@@ -482,6 +485,12 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({
             )}
           </span>
         </div>
+
+        {isDemoFallback && (
+          <p role="status" className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-900">
+            The listings service is unavailable. Showing bundled demonstration listings; current property records require a connected listings API.
+          </p>
+        )}
 
         {/* Listings Grid */}
         {loading ? (
